@@ -10,7 +10,20 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        let gradientView = LinearGradientView()
+        gradientView.frame = view.bounds
+        view.addSubview(gradientView)
+        
+        self.tabBarController?.tabBar.isHidden = true
+        
+        Task { @MainActor in
+            try? await Task.sleep(for: .seconds(5.5))
+            UIView.animate(withDuration: 0.5) {
+                gradientView.alpha = 0
+            }
+            self.tabBarController?.tabBar.isHidden = false
+        }
     }
 
 
@@ -35,7 +48,6 @@ class ViewController: UIViewController {
         print("toquei botão baixo direita")
     }
     
-    @IBOutlet weak var pouTapped: UIImageView!
     
     
     
